@@ -131,6 +131,10 @@ class MyNumberA extends React.Component {
   componentWillUnmount() {
     console.log("MyNumberA componentWillUnmount");
   }
+
+  componentDidUpdate() {
+    console.log("MyNumberA componentDidUpdate");
+  }
 }
 
 class MyNumberB extends React.Component {
@@ -214,6 +218,10 @@ class MyNumberB extends React.Component {
 
   componentWillUnmount() {
     console.log("MyNumberB componentWillUnmount");
+  }
+
+  componentDidUpdate() {
+    console.log("MyNumberB componentDidUpdate");
   }
 }
 
@@ -367,6 +375,10 @@ class MyNumberC extends React.Component {
   componentWillUnmount() {
     console.log("MyNumberC componentWillUnmount");
   }
+
+  componentDidUpdate() {
+    console.log("MyNumberC componentDidUpdate");
+  }
 }
 
 class MyNumber extends React.Component {
@@ -404,6 +416,10 @@ class MyNumber extends React.Component {
 
   componentWillUnmount() {
     console.log("MyNumber componentWillUnmount");
+  }
+
+  componentDidUpdate() {
+    console.log("MyNumber componentDidUpdate");
   }
 }
 

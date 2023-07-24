@@ -126,6 +126,10 @@ class MyFunctionA extends React.Component {
   componentWillUnmount() {
     console.log("MyFunctionA componentWillUnmount");
   }
+
+  componentDidUpdate() {
+    console.log("MyFunctionA componentDidUpdate");
+  }
 }
 
 class MyFunctionB extends React.Component {
@@ -223,6 +227,10 @@ class MyFunctionB extends React.Component {
 
   componentWillUnmount() {
     console.log("MyFunctionB componentWillUnmount");
+  }
+
+  componentDidUpdate() {
+    console.log("MyFunctionB componentDidUpdate");
   }
 }
 
@@ -360,6 +368,10 @@ class MyFunctionC extends React.Component {
   componentWillUnmount() {
     console.log("MyFunctionC componentWillUnmount");
   }
+
+  componentDidUpdate() {
+    console.log("MyFunctionC componentDidUpdate");
+  }
 }
 
 class MyFunction extends React.Component {
@@ -397,6 +409,10 @@ class MyFunction extends React.Component {
 
   componentWillUnmount() {
     console.log("MyFunction componentWillUnmount");
+  }
+
+  componentDidUpdate() {
+    console.log("MyFunction componentDidUpdate");
   }
 }
 

@@ -178,6 +178,10 @@ class App extends React.Component {
   componentWillUnmount() {
     console.log("App componentWillUnmount");
   }
+
+  componentDidUpdate() {
+    console.log("App componentDidUpdate");
+  }
 }
 
 export default App;

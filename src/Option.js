@@ -112,6 +112,10 @@ class MyOption extends React.Component {
   componentWillUnmount() {
     console.log("MyOption componentWillUnmount");
   }
+
+  componentDidUpdate() {
+    console.log("MyOption componentDidUpdate");
+  }
 }
 
 export default MyOption;
