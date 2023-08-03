@@ -1,8 +1,20 @@
 import './Number.css';
 import React from 'react';
 
-class MyNumberA extends React.Component {
-  constructor(props) {
+type MyNumberAProps = {
+  setMyNumberA: (myNumerA: MyNumberA) => void;
+  setMode: (newMode: number) => void;
+};
+export class MyNumberA extends React.Component<MyNumberAProps, {
+  // state
+  dispStr: string;
+  dispLog: string;
+  dispAnswer: string;
+  dispMemory: string;
+  mrcButtonText: string;
+  memoryRecalled: boolean;
+}> {
+  constructor(props: MyNumberAProps) {
     console.log("MyNumberA constructor");
     super(props);
 
@@ -32,27 +44,27 @@ class MyNumberA extends React.Component {
   }
 
   // 状態変更用コールバック関数
-  setDispStr( dispStr ){
+  setDispStr( dispStr: string ){
     this.setState({ dispStr: dispStr });
   }
-  setDispLog( dispLog ){
+  setDispLog( dispLog: string ){
     this.setState({ dispLog: dispLog });
   }
-  setDispAnswer( dispAnswer ){
+  setDispAnswer( dispAnswer: string ){
     this.setState({ dispAnswer: dispAnswer });
   }
-  setDispMemory( dispMemory ){
+  setDispMemory( dispMemory: string ){
     this.setState({ dispMemory: dispMemory });
   }
-  setMrcButtonText( mrcButtonText ){
+  setMrcButtonText( mrcButtonText: string ){
     this.setState({ mrcButtonText: mrcButtonText });
   }
-  setMemoryRecalled( memoryRecalled ){
+  setMemoryRecalled( memoryRecalled: boolean ){
     this.setState({ memoryRecalled: memoryRecalled });
   }
 
   // 操作
-  onButtonNumber( func ){
+  onButtonNumber( func: () => void ){
     if( !global.calc.errorFlag ){
       func();
     }
@@ -79,7 +91,7 @@ class MyNumberA extends React.Component {
     console.log("MyNumberA render");
 
     // 桁区切り
-    let dispStr = this.state.dispStr;
+    let dispStr: string = this.state.dispStr;
     if (global.calc.separatorType == global.calc.separatorTypeDash) {
       dispStr = global.calcNumberService.sepString(dispStr, "'");
     } else if (global.calc.separatorType == global.calc.separatorTypeComma) {
@@ -137,8 +149,14 @@ class MyNumberA extends React.Component {
   }
 }
 
-class MyNumberB extends React.Component {
-  constructor(props) {
+type MyNumberBProps = {
+  setMyNumberB: (myNumberB: MyNumberB) => void;
+};
+export class MyNumberB extends React.Component<MyNumberBProps, {
+  // state
+  errorFlag: boolean;
+}> {
+  constructor(props: MyNumberBProps) {
     console.log("MyNumberB constructor");
     super(props);
 
@@ -158,17 +176,17 @@ class MyNumberB extends React.Component {
   }
 
   // 状態変更用コールバック関数
-  setErrorFlag( errorFlag ){
+  setErrorFlag( errorFlag: boolean ){
     this.setState({ errorFlag: errorFlag });
   }
 
   // 操作
-  onButtonNumber( func ){
+  onButtonNumber( func: () => void ){
     if( !global.calc.errorFlag ){
       func();
     }
   }
-  onButtonClear( allFlag ){
+  onButtonClear( allFlag: boolean ){
     global.calcNumberService.clearEntry( allFlag );
   }
   onButtonCE(){
@@ -226,7 +244,7 @@ class MyNumberB extends React.Component {
 }
 
 class MyNumberC extends React.Component {
-  constructor(props) {
+  constructor(props: {}) {
     console.log("MyNumberC constructor");
     super(props);
 
@@ -250,7 +268,7 @@ class MyNumberC extends React.Component {
   }
 
   // 操作
-  onButtonNumber( func ){
+  onButtonNumber( func: () => void ){
     if( !global.calc.errorFlag ){
       func();
     }
@@ -381,8 +399,14 @@ class MyNumberC extends React.Component {
   }
 }
 
-class MyNumber extends React.Component {
-  constructor(props) {
+type MyNumberProps = {
+  setMode: (newMode: number) => void;
+};
+class MyNumber extends React.Component<MyNumberProps> {
+  myNumberA?: MyNumberA;
+  myNumberB?: MyNumberB;
+
+  constructor(props: MyNumberProps) {
     console.log("MyNumber constructor");
     super(props);
 
@@ -390,10 +414,10 @@ class MyNumber extends React.Component {
     this.setMyNumberB = this.setMyNumberB.bind(this);
   }
 
-  setMyNumberA( myNumberA ) {
+  setMyNumberA( myNumberA: MyNumberA ) {
     this.myNumberA = myNumberA;
   }
-  setMyNumberB( myNumberB ) {
+  setMyNumberB( myNumberB: MyNumberB ) {
     this.myNumberB = myNumberB;
   }
 
@@ -411,7 +435,7 @@ class MyNumber extends React.Component {
   componentDidMount() {
     console.log("MyNumber componentDidMount");
 
-    global.calcNumberService.initWithComponent(this.myNumberA, this.myNumberB);
+    global.calcNumberService.initWithComponent(this.myNumberA!, this.myNumberB!);
   }
 
   componentWillUnmount() {

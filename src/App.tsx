@@ -1,14 +1,24 @@
 import './App.css';
-import './Global.js';
+import './Global';
 import CalcFunctionService from './service/CalcFunctionService';
 import CalcNumberService from './service/CalcNumberService';
 import MyFunction from './Function';
+import type { MyFunctionA, MyFunctionB } from './Function';
 import MyNumber from './Number';
+import type { MyNumberA, MyNumberB } from './Number';
 import MyOption from './Option';
 import React from 'react';
 
+declare global {
+  var calcNumberService: MyCalcNumberService;
+  var calcFunctionService: MyCalcFunctionService;
+}
+
 class MyCalcNumberService extends CalcNumberService {
-  initWithComponent( componentA, componentB ){
+  componentA?: MyNumberA;
+  componentB?: MyNumberB;
+
+  initWithComponent( componentA: MyNumberA, componentB: MyNumberB ){
     this.componentA = componentA;
     this.componentB = componentB;
 
@@ -18,59 +28,62 @@ class MyCalcNumberService extends CalcNumberService {
     super.init();
   }
 
-  setDispError( type ){
+  setDispError( type: number ){
     if( type == global.calc.errorTypeDivideByZero ){
-      this.componentA.setDispStr( "Divide by zero" );
+      this.componentA!.setDispStr( "Divide by zero" );
     } else if( type == global.calc.errorTypePositiveInfinity ){
-      this.componentA.setDispStr( "Infinity" );
+      this.componentA!.setDispStr( "Infinity" );
     } else if( type == global.calc.errorTypeNegativeInfinity ){
-      this.componentA.setDispStr( "-Infinity" );
+      this.componentA!.setDispStr( "-Infinity" );
     } else if( type == global.calc.errorTypeNotANumber ){
-      this.componentA.setDispStr( "NaN" );
+      this.componentA!.setDispStr( "NaN" );
     }
   }
-  setDispResult( value ){
-    this.componentA.setDispStr( this.valueToString( value, 15 ) );
+  setDispResult( value: number ){
+    this.componentA!.setDispStr( this.valueToString( value, 15 ) );
   }
-  setDispEntry( entry ){
-    this.componentA.setDispStr( entry );
+  setDispEntry( entry: string ){
+    this.componentA!.setDispStr( entry );
   }
   clearDispLog(){
-    this.componentA.setDispLog( "" );
+    this.componentA!.setDispLog( "" );
   }
-  setDispLog( value, opType ){
+  setDispLog( value: number, opType: number ){
     if( opType == global.calc.opTypeDiv ){
-      this.componentA.setDispLog( this.valueToString( value, 10 ) + " ÷" );
+      this.componentA!.setDispLog( this.valueToString( value, 10 ) + " ÷" );
     }
     if( opType == global.calc.opTypeMul ){
-      this.componentA.setDispLog( this.valueToString( value, 10 ) + " ×" );
+      this.componentA!.setDispLog( this.valueToString( value, 10 ) + " ×" );
     }
     if( opType == global.calc.opTypeSub ){
-      this.componentA.setDispLog( this.valueToString( value, 10 ) + " -" );
+      this.componentA!.setDispLog( this.valueToString( value, 10 ) + " -" );
     }
     if( opType == global.calc.opTypeAdd ){
-      this.componentA.setDispLog( this.valueToString( value, 10 ) + " +" );
+      this.componentA!.setDispLog( this.valueToString( value, 10 ) + " +" );
     }
   }
-  addDispLog( value ){
-    this.componentA.setDispLog( this.componentA.state.dispLog + " " + this.valueToString( value, 10 ) + " =" );
+  addDispLog( value: number ){
+    this.componentA!.setDispLog( this.componentA!.state.dispLog + " " + this.valueToString( value, 10 ) + " =" );
   }
-  setDispAnswer( value ){
-    this.componentA.setDispAnswer( this.valueToString( value, 10 ) );
+  setDispAnswer( value: number ){
+    this.componentA!.setDispAnswer( this.valueToString( value, 10 ) );
   }
-  setDispMemory( value ){
-    this.componentA.setDispMemory( this.valueToString( value, 10 ) );
+  setDispMemory( value: number ){
+    this.componentA!.setDispMemory( this.valueToString( value, 10 ) );
   }
-  memoryRecalled( flag ){
-    this.componentA.setMrcButtonText( flag ? "MC" : "MR" );
+  memoryRecalled( flag: boolean ){
+    this.componentA!.setMrcButtonText( flag ? "MC" : "MR" );
   }
-  errorChanged( flag ){
-    this.componentB.setErrorFlag( flag );
+  errorChanged( flag: boolean ){
+    this.componentB!.setErrorFlag( flag );
   }
 }
 
 class MyCalcFunctionService extends CalcFunctionService {
-  initWithComponent( componentA, componentB ){
+  componentA?: MyFunctionA;
+  componentB?: MyFunctionB;
+
+  initWithComponent( componentA: MyFunctionA, componentB: MyFunctionB ){
     this.componentA = componentA;
     this.componentB = componentB;
 
@@ -80,49 +93,52 @@ class MyCalcFunctionService extends CalcFunctionService {
     super.init();
   }
 
-  setDispError( type ){
+  setDispError( type: number ){
     if( type == global.calc.errorTypeDivideByZero ){
-      this.componentA.setDispStr( "Divide by zero" );
+      this.componentA!.setDispStr( "Divide by zero" );
     } else if( type == global.calc.errorTypePositiveInfinity ){
-      this.componentA.setDispStr( "Infinity" );
+      this.componentA!.setDispStr( "Infinity" );
     } else if( type == global.calc.errorTypeNegativeInfinity ){
-      this.componentA.setDispStr( "-Infinity" );
+      this.componentA!.setDispStr( "-Infinity" );
     } else if( type == global.calc.errorTypeNotANumber ){
-      this.componentA.setDispStr( "NaN" );
+      this.componentA!.setDispStr( "NaN" );
     }
   }
-  setDispResult( value ){
-    this.componentA.setDispStr( this.valueToString( value, 15 ) );
+  setDispResult( value: number ){
+    this.componentA!.setDispStr( this.valueToString( value, 15 ) );
   }
-  setDispEntry( entry ){
-    this.componentA.setDispStr( entry );
+  setDispEntry( entry: string ){
+    this.componentA!.setDispStr( entry );
   }
-  setDispMemory( value ){
-    this.componentA.setDispMemory( this.valueToString( value, 10 ) );
+  setDispMemory( value: number ){
+    this.componentA!.setDispMemory( this.valueToString( value, 10 ) );
   }
-  memoryRecalled( flag ){
-    this.componentA.setMrcButtonText( flag ? "MC" : "MR" );
+  memoryRecalled( flag: boolean ){
+    this.componentA!.setMrcButtonText( flag ? "MC" : "MR" );
   }
-  errorChanged( flag ){
-    this.componentB.setErrorFlag( flag );
+  errorChanged( flag: boolean ){
+    this.componentB!.setErrorFlag( flag );
   }
 
-  angleChanged( type ){
+  angleChanged( type: number ){
     if( type == global.calc.angleTypeRad ){
-      this.componentA.setDispAngle( "RAD" );
-      this.componentB.setAngleButtonText( "DEG" );
+      this.componentA!.setDispAngle( "RAD" );
+      this.componentB!.setAngleButtonText( "DEG" );
     } else if( type == global.calc.angleTypeDeg ){
-      this.componentA.setDispAngle( "DEG" );
-      this.componentB.setAngleButtonText( "GRAD" );
+      this.componentA!.setDispAngle( "DEG" );
+      this.componentB!.setAngleButtonText( "GRAD" );
     } else if( type == global.calc.angleTypeGrad ){
-      this.componentA.setDispAngle( "GRAD" );
-      this.componentB.setAngleButtonText( "RAD" );
+      this.componentA!.setDispAngle( "GRAD" );
+      this.componentB!.setAngleButtonText( "RAD" );
     }
   }
 }
 
-class App extends React.Component {
-  constructor(props) {
+class App extends React.Component<{}, {
+  // state
+  mode: number;
+}> {
+  constructor(props: {}) {
     console.log("App constructor");
     super(props);
 
@@ -144,7 +160,7 @@ class App extends React.Component {
   }
 
   // 状態変更用コールバック関数
-  setMode(newMode) {
+  setMode(newMode: number) {
     if (newMode == global.calc.modeNumber) {
       global.calcNumberService.init();
     } else if (newMode == global.calc.modeFunction) {

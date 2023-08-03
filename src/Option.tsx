@@ -1,8 +1,15 @@
 import './Option.css';
 import React from 'react';
 
-class MyOption extends React.Component {
-  constructor(props) {
+type MyOptionProps = {
+  setMode: (newMode: number) => void;
+};
+class MyOption extends React.Component<MyOptionProps, {
+  // state
+  italicFlag: boolean;
+  separatorType: boolean;
+}> {
+  constructor(props: MyOptionProps) {
     console.log("MyOption constructor");
     super(props);
 
@@ -18,7 +25,7 @@ class MyOption extends React.Component {
   }
 
   // イタリック
-  handleChangeItalic(event) {
+  handleChangeItalic(event: React.ChangeEvent<HTMLElement>) {
     console.log("handleChangeItalic");
 
     global.calc.italicFlag = !global.calc.italicFlag;
@@ -28,7 +35,7 @@ class MyOption extends React.Component {
   }
 
   // 桁区切り
-  handleChangeSeparatorTypeNone(event) {
+  handleChangeSeparatorTypeNone(event: React.ChangeEvent<HTMLElement>) {
     console.log("handleChangeSeparatorTypeNone");
 
     global.calc.separatorType = global.calc.separatorTypeNone;
@@ -36,7 +43,7 @@ class MyOption extends React.Component {
 
     this.setState({ separatorType: global.calc.separatorType });
   }
-  handleChangeSeparatorTypeDash(event) {
+  handleChangeSeparatorTypeDash(event: React.ChangeEvent<HTMLElement>) {
     console.log("handleChangeSeparatorTypeDash");
 
     global.calc.separatorType = global.calc.separatorTypeDash;
@@ -44,7 +51,7 @@ class MyOption extends React.Component {
 
     this.setState({ separatorType: global.calc.separatorType });
   }
-  handleChangeSeparatorTypeComma(event) {
+  handleChangeSeparatorTypeComma(event: React.ChangeEvent<HTMLElement>) {
     console.log("handleChangeSeparatorTypeComma");
 
     global.calc.separatorType = global.calc.separatorTypeComma;

@@ -1,8 +1,19 @@
 import './Function.css';
 import React from 'react';
 
-class MyFunctionA extends React.Component {
-  constructor(props) {
+type MyFunctionAProps = {
+  setMyFunctionA: (myFunctionA: MyFunctionA) => void;
+  setMode: (newMode: number) => void;
+};
+export class MyFunctionA extends React.Component<MyFunctionAProps, {
+  // state
+  dispStr: string;
+  dispAngle: string;
+  dispMemory: string;
+  mrcButtonText: string;
+  memoryRecalled: boolean;
+}> {
+  constructor(props: MyFunctionAProps) {
     console.log("MyFunctionA constructor");
     super(props);
 
@@ -30,24 +41,24 @@ class MyFunctionA extends React.Component {
   }
 
   // 状態変更用コールバック関数
-  setDispStr( dispStr ){
+  setDispStr( dispStr: string ){
     this.setState({ dispStr: dispStr });
   }
-  setDispAngle( dispAngle ){
+  setDispAngle( dispAngle: string ){
     this.setState({ dispAngle: dispAngle });
   }
-  setDispMemory( dispMemory ){
+  setDispMemory( dispMemory: string ){
     this.setState({ dispMemory: dispMemory });
   }
-  setMrcButtonText( mrcButtonText ){
+  setMrcButtonText( mrcButtonText: string ){
     this.setState({ mrcButtonText: mrcButtonText });
   }
-  setMemoryRecalled( memoryRecalled ){
+  setMemoryRecalled( memoryRecalled: boolean ){
     this.setState({ memoryRecalled: memoryRecalled });
   }
 
   // 操作
-  onButtonFunction( func ){
+  onButtonFunction( func: () => void ){
     if( !global.calc.errorFlag ){
       func();
     }
@@ -132,8 +143,15 @@ class MyFunctionA extends React.Component {
   }
 }
 
-class MyFunctionB extends React.Component {
-  constructor(props) {
+type MyFunctionBProps = {
+  setMyFunctionB: (myFunctionB: MyFunctionB) => void;
+};
+export class MyFunctionB extends React.Component<MyFunctionBProps, {
+  // state
+  angleButtonText: string;
+  errorFlag: boolean;
+}> {
+  constructor(props: MyFunctionBProps) {
     console.log("MyFunctionB constructor");
     super(props);
 
@@ -155,10 +173,10 @@ class MyFunctionB extends React.Component {
   }
 
   // 状態変更用コールバック関数
-  setAngleButtonText( angleButtonText ){
+  setAngleButtonText( angleButtonText: string ){
     this.setState({ angleButtonText: angleButtonText });
   }
-  setErrorFlag( errorFlag ){
+  setErrorFlag( errorFlag: boolean ){
     this.setState({ errorFlag: errorFlag });
   }
 
@@ -173,12 +191,12 @@ class MyFunctionB extends React.Component {
   }
 
   // 操作
-  onButtonFunction( func ){
+  onButtonFunction( func: () => void ){
     if( !global.calc.errorFlag ){
       func();
     }
   }
-  onButtonClear( allFlag ){
+  onButtonClear( allFlag: boolean ){
     global.calcFunctionService.clearEntry( allFlag );
   }
   onButtonCE(){
@@ -198,8 +216,8 @@ class MyFunctionB extends React.Component {
   render() {
     console.log("MyFunctionB render");
 
-    const classNameDivCe = "button2 div_color_" + (global.calc.errorFlag ? "red" : "white");
-    const classNameSpanCe = "span_font_32 span_color_" + (global.calc.errorFlag ? "white" : "red");
+    const classNameDivCe: string = "button2 div_color_" + (global.calc.errorFlag ? "red" : "white");
+    const classNameSpanCe: string = "span_font_32 span_color_" + (global.calc.errorFlag ? "white" : "red");
 
     return (
       <div>
@@ -235,7 +253,7 @@ class MyFunctionB extends React.Component {
 }
 
 class MyFunctionC extends React.Component {
-  constructor(props) {
+  constructor(props: {}) {
     console.log("MyFunctionC constructor");
     super(props);
 
@@ -255,7 +273,7 @@ class MyFunctionC extends React.Component {
   }
 
   // 操作
-  onButtonFunction( func ){
+  onButtonFunction( func: () => void ){
     if( !global.calc.errorFlag ){
       func();
     }
@@ -374,8 +392,14 @@ class MyFunctionC extends React.Component {
   }
 }
 
-class MyFunction extends React.Component {
-  constructor(props) {
+type MyFunctionProps = {
+  setMode: (newMode: number) => void;
+};
+class MyFunction extends React.Component<MyFunctionProps> {
+  myFunctionA?: MyFunctionA;
+  myFunctionB?: MyFunctionB;
+
+  constructor(props: MyFunctionProps) {
     console.log("MyFunction constructor");
     super(props);
 
@@ -383,10 +407,10 @@ class MyFunction extends React.Component {
     this.setMyFunctionB = this.setMyFunctionB.bind(this);
   }
 
-  setMyFunctionA( myFunctionA ) {
+  setMyFunctionA( myFunctionA: MyFunctionA ) {
     this.myFunctionA = myFunctionA;
   }
-  setMyFunctionB( myFunctionB ) {
+  setMyFunctionB( myFunctionB: MyFunctionB ) {
     this.myFunctionB = myFunctionB;
   }
 
@@ -404,7 +428,7 @@ class MyFunction extends React.Component {
   componentDidMount() {
     console.log("MyFunction componentDidMount");
 
-    global.calcFunctionService.initWithComponent(this.myFunctionA, this.myFunctionB);
+    global.calcFunctionService.initWithComponent(this.myFunctionA!, this.myFunctionB!);
   }
 
   componentWillUnmount() {

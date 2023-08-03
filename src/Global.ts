@@ -1,5 +1,9 @@
 import MyCookie from './service/Cookie.js';
 
+declare global {
+  var calc: any;
+}
+
 global.calc = {};
 
 global.calc.modeNumber   = 0;
@@ -70,7 +74,7 @@ global.calc.saveMemoryRecalled = 0x00000004;
 global.calc.saveAngleType      = 0x00000008;
 global.calc.saveItalicFlag     = 0x00000010;
 global.calc.saveSeparatorType  = 0x00000020;
-global.calc.save = (flag) => {
+global.calc.save = (flag: number) => {
   let cookie = new MyCookie();
 
   if( (flag & global.calc.saveAnswer) !== 0 ){
@@ -94,9 +98,6 @@ global.calc.save = (flag) => {
 };
 
 global.calc.isEnglish = () => {
-  const language = (window.navigator.languages && window.navigator.languages[0]) ||
-    window.navigator.browserLanguage ||
-    window.navigator.language ||
-    window.navigator.userLanguage;
+  const language = (window.navigator.languages && window.navigator.languages[0]) || window.navigator.language;
   return language.substring(0, 2) === "en";
 }
