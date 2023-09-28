@@ -8,7 +8,6 @@
   height: 20px;
   line-height: 20px;
   text-align: left;
-  background-color: #E0E0E0;
 }
 .span_log1 {
   font-size: 17px;
@@ -19,7 +18,6 @@
   height: 50px;
   line-height: 50px;
   text-align: right;
-  background-color: #E0E0E0;
 }
 .span_log2 {
   font-size: 29px;
@@ -71,6 +69,9 @@
   width: 106px !important;
 }
 
+.div_log_color {
+  background-color: #E0E0E0;
+}
 .div_color_blue {
   background-color: #C0C0FF;
 }
@@ -88,6 +89,25 @@
 }
 .div_color_white:active {
   background-color: #CFCFCF;
+}
+
+.div_color_blue_t {
+  background-color: #C0C0FF7F;
+}
+.div_color_blue_t:active {
+  background-color: #9090CF7F;
+}
+.div_color_red_t {
+  background-color: #FFA0A07F;
+}
+.div_color_red_t:active {
+  background-color: #CF70707F;
+}
+.div_color_white_t {
+  background-color: #FFFFFF7F;
+}
+.div_color_white_t:active {
+  background-color: #CFCFCF7F;
 }
 
 .span_color_black {
@@ -108,4 +128,11 @@
 }
 .span_font_40 {
   font-size: 40px;
+}
+
+.shadow_lt {
+  text-shadow: #404040 -1px -1px;
+}
+.shadow_rb {
+  text-shadow: #E0E0E0 1px 1px;
 }

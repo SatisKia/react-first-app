@@ -81,38 +81,42 @@ class MyFunctionA extends React.Component {
       dispStr = global.calcFunctionService.sepString(dispStr, ",");
     }
 
+    const colorTrans = global.app.imageFlag ? "_t" : "";
+    const shadowLT = global.app.imageFlag ? " shadow_lt" : "";
+    const shadowRB = global.app.imageFlag ? " shadow_rb" : "";
+
     return (
       <div>
-        <div className="div_log1" onClick={() => {
+        <div className={"div_log1" + (global.app.imageFlag ? "" : " div_log_color")} onClick={() => {
           global.calc.returnMode = global.calc.modeFunction;
           this.props.setMode(global.calc.modeOption);
         }}>
-          <span className="span_log1">{this.state.dispAngle}</span>
+          <span className={"span_log1" + shadowRB}>{this.state.dispAngle}</span>
         </div>
-        <div className="div_log2" onClick={() => {
+        <div className={"div_log2" + (global.app.imageFlag ? "" : " div_log_color")} onClick={() => {
           global.calc.returnMode = global.calc.modeFunction;
           this.props.setMode(global.calc.modeOption);
         }}>
-          <span className={global.calc.italicFlag ? "span_log2_italic" : "span_log2"}>{dispStr}</span>
+          <span className={(global.calc.italicFlag ? "span_log2_italic" : "span_log2") + shadowRB}>{dispStr}</span>
         </div>
-        <div className="div_log1" onClick={() => {
+        <div className={"div_log1" + (global.app.imageFlag ? "" : " div_log_color")} onClick={() => {
           global.calc.returnMode = global.calc.modeFunction;
           this.props.setMode(global.calc.modeOption);
         }}>
-          <span className="span_log1">M = {this.state.dispMemory}</span>
+          <span className={"span_log1" + shadowRB}>M = {this.state.dispMemory}</span>
         </div>
         <div className="div_row">
-          <div className="button1 div_color_blue" onClick={this.onButtonMAdd}>
-            <span className="span_font_25 span_color_black">M+</span>
+          <div className={"button1 div_color_blue" + colorTrans} onClick={this.onButtonMAdd}>
+            <span className={"span_font_25 span_color_black" + shadowRB}>M+</span>
           </div>
-          <div className="button1 div_color_blue" onClick={this.onButtonMSub}>
-            <span className="span_font_25 span_color_black">M-</span>
+          <div className={"button1 div_color_blue" + colorTrans} onClick={this.onButtonMSub}>
+            <span className={"span_font_25 span_color_black" + shadowRB}>M-</span>
           </div>
-          <div className="button1 div_color_blue" onClick={this.onButtonMRC}>
-            <span className={"span_font_25 span_color_" + (global.calc.memoryRecalled ? "red" : "black")}>{this.state.mrcButtonText}</span>
+          <div className={"button1 div_color_blue" + colorTrans} onClick={this.onButtonMRC}>
+            <span className={"span_font_25 span_color_" + (global.calc.memoryRecalled ? "red" : "black") + shadowRB}>{this.state.mrcButtonText}</span>
           </div>
-          <div className="button1 div_color_red" onClick={this.onButtonNumber}>
-            <span className="span_font_25 span_color_white">NUM</span>
+          <div className={"button1 div_color_red" + colorTrans} onClick={this.onButtonNumber}>
+            <span className={"span_font_25 span_color_white" + shadowLT}>NUM</span>
           </div>
         </div>
       </div>
@@ -198,23 +202,27 @@ class MyFunctionB extends React.Component {
   render() {
     console.log("MyFunctionB render");
 
-    const classNameDivCe = "button2 div_color_" + (global.calc.errorFlag ? "red" : "white");
+    const colorTrans = global.app.imageFlag ? "_t" : "";
+    const shadowLT = global.app.imageFlag ? " shadow_lt" : "";
+    const shadowRB = global.app.imageFlag ? " shadow_rb" : "";
+
+    const classNameDivCe = "button2 div_color_" + (global.calc.errorFlag ? "red" : "white") + colorTrans;
     const classNameSpanCe = "span_font_32 span_color_" + (global.calc.errorFlag ? "white" : "red");
 
     return (
       <div>
         <div className="div_row">
           <div className={classNameDivCe} onClick={this.onButtonCE}>
-            <span className={classNameSpanCe}>CE</span>
+            <span className={classNameSpanCe + (global.calc.errorFlag ? shadowLT : shadowRB)}>CE</span>
           </div>
           <div className={classNameDivCe} onClick={this.onButtonC}>
-            <span className={classNameSpanCe}>C</span>
+            <span className={classNameSpanCe + (global.calc.errorFlag ? shadowLT : shadowRB)}>C</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButtonAngle}>
-            <span className="span_font_25 span_color_black">{this.state.angleButtonText}</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButtonAngle}>
+            <span className={"span_font_25 span_color_black" + shadowRB}>{this.state.angleButtonText}</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButtonSqrt}>
-            <span className="span_font_40 span_color_black">√</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButtonSqrt}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>√</span>
           </div>
         </div>
       </div>
@@ -311,50 +319,54 @@ class MyFunctionC extends React.Component {
 
   render() {
     console.log("MyFunctionC render");
+
+    const colorTrans = global.app.imageFlag ? "_t" : "";
+    const shadowRB = global.app.imageFlag ? " shadow_rb" : "";
+
     return (
       <div>
         <div className="div_row">
-          <div className="button2 func1 div_color_white" onClick={this.onButtonSin}>
-            <span className="span_font_32 span_color_black">sin</span>
+          <div className={"button2 func1 div_color_white" + colorTrans} onClick={this.onButtonSin}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>sin</span>
           </div>
-          <div className="button2 func1 div_color_white" onClick={this.onButtonCos}>
-            <span className="span_font_32 span_color_black">cos</span>
+          <div className={"button2 func1 div_color_white" + colorTrans} onClick={this.onButtonCos}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>cos</span>
           </div>
-          <div className="button2 func2 div_color_white" onClick={this.onButtonTan}>
-            <span className="span_font_32 span_color_black">tan</span>
-          </div>
-        </div>
-        <div className="div_row">
-          <div className="button2 func1 div_color_white" onClick={this.onButtonArcSin}>
-            <span className="span_font_32 span_color_black">asin</span>
-          </div>
-          <div className="button2 func1 div_color_white" onClick={this.onButtonArcCos}>
-            <span className="span_font_32 span_color_black">acos</span>
-          </div>
-          <div className="button2 func2 div_color_white" onClick={this.onButtonArcTan}>
-            <span className="span_font_32 span_color_black">atan</span>
+          <div className={"button2 func2 div_color_white" + colorTrans} onClick={this.onButtonTan}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>tan</span>
           </div>
         </div>
         <div className="div_row">
-          <div className="button2 func1 div_color_white" onClick={this.onButtonLog}>
-            <span className="span_font_32 span_color_black">ln</span>
+          <div className={"button2 func1 div_color_white" + colorTrans} onClick={this.onButtonArcSin}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>asin</span>
           </div>
-          <div className="button2 func1 div_color_white" onClick={this.onButtonLog10}>
-            <span className="span_font_32 span_color_black">log</span>
+          <div className={"button2 func1 div_color_white" + colorTrans} onClick={this.onButtonArcCos}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>acos</span>
           </div>
-          <div className="button2 func2 div_color_white" onClick={this.onButtonSqr}>
-            <span className="span_font_32 span_color_black">sqr</span>
+          <div className={"button2 func2 div_color_white" + colorTrans} onClick={this.onButtonArcTan}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>atan</span>
           </div>
         </div>
         <div className="div_row">
-          <div className="button3 func1 div_color_white" onClick={this.onButtonExp}>
-            <span className="span_font_32 span_color_black">exp</span>
+          <div className={"button2 func1 div_color_white" + colorTrans} onClick={this.onButtonLog}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>ln</span>
           </div>
-          <div className="button3 func1 div_color_white" onClick={this.onButtonExp10}>
-            <span className="span_font_32 span_color_black">exp10</span>
+          <div className={"button2 func1 div_color_white" + colorTrans} onClick={this.onButtonLog10}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>log</span>
           </div>
-          <div className="button3 func2 div_color_white" onClick={this.onButtonInt}>
-            <span className="span_font_32 span_color_black">int</span>
+          <div className={"button2 func2 div_color_white" + colorTrans} onClick={this.onButtonSqr}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>sqr</span>
+          </div>
+        </div>
+        <div className="div_row">
+          <div className={"button3 func1 div_color_white" + colorTrans} onClick={this.onButtonExp}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>exp</span>
+          </div>
+          <div className={"button3 func1 div_color_white" + colorTrans} onClick={this.onButtonExp10}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>exp10</span>
+          </div>
+          <div className={"button3 func2 div_color_white" + colorTrans} onClick={this.onButtonInt}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>int</span>
           </div>
         </div>
       </div>
@@ -392,8 +404,16 @@ class MyFunction extends React.Component {
 
   render() {
     console.log("MyFunction render");
+
+    const backgroundImage = global.app.imageFlag ? "url(" + global.app.imageUrl + ")" : "";
+    const backgroundPosition = "" + global.app.imageX + "% " + global.app.imageY + "%";
+
     return (
-      <div className="body">
+      <div className="body" style={{
+        backgroundImage: backgroundImage,
+        backgroundSize: 'cover',
+        backgroundPosition: backgroundPosition
+      }}>
         <MyFunctionA setMyFunctionA={this.setMyFunctionA} setMode={this.props.setMode} />
         <MyFunctionB setMyFunctionB={this.setMyFunctionB} />
         <MyFunctionC />

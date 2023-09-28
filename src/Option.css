@@ -109,3 +109,21 @@
 .radio1 input {
   display: none;
 }
+
+.div_row {
+  display: flex;
+}
+.div_space_h {
+  width: 10px;
+}
+.input1 {
+  width: 100%;
+  font-size: 18px;
+}
+.input2 {
+  width: 100%;
+}
+
+.shadow_rb {
+  text-shadow: #E0E0E0 1px 1px;
+}

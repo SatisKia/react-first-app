@@ -1,5 +1,42 @@
 import MyCookie from './service/Cookie.js';
 
+function hashCode(str) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = hash * 31 + str.charCodeAt(i);
+    hash |= 0; // 符号付き32bit整数にする
+  }
+  return hash;
+}
+
+global.app = {}
+
+global.app.init = () => {
+  let cookie = new MyCookie();
+
+  // バックグラウンド画像
+  global.app.imageFlag = cookie.getBool("imageFlag", false);
+  global.app.imageUrl = cookie.getValue("imageUrl", "");
+  let _hashCode = hashCode(global.app.imageUrl);
+console.log(global.app.imageUrl + " " + _hashCode);
+  global.app.imageX = cookie.getNumber("imageX_" + _hashCode, 50);
+  global.app.imageY = cookie.getNumber("imageY_" + _hashCode, 50);
+};
+global.app.reload = () => {
+  let cookie = new MyCookie();
+  let _hashCode = hashCode(global.app.imageUrl);
+  global.app.imageX = cookie.getNumber("imageX_" + _hashCode, 50);
+  global.app.imageY = cookie.getNumber("imageY_" + _hashCode, 50);
+}
+global.app.save = () => {
+  let cookie = new MyCookie();
+  cookie.setBool("imageFlag", global.app.imageFlag);
+  cookie.setValue("imageUrl", global.app.imageUrl);
+  let _hashCode = hashCode(global.app.imageUrl);
+  cookie.setNumber("imageX_" + _hashCode, global.app.imageX);
+  cookie.setNumber("imageY_" + _hashCode, global.app.imageY);
+};
+
 global.calc = {};
 
 global.calc.modeNumber   = 0;

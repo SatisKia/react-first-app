@@ -86,38 +86,42 @@ class MyNumberA extends React.Component {
       dispStr = global.calcNumberService.sepString(dispStr, ",");
     }
 
+    const colorTrans = global.app.imageFlag ? "_t" : "";
+    const shadowLT = global.app.imageFlag ? " shadow_lt" : "";
+    const shadowRB = global.app.imageFlag ? " shadow_rb" : "";
+
     return (
       <div>
-        <div className="div_log1" onClick={() => {
+        <div className={"div_log1" + (global.app.imageFlag ? "" : " div_log_color")} onClick={() => {
           global.calc.returnMode = global.calc.modeNumber;
           this.props.setMode(global.calc.modeOption);
         }}>
-          <span className="span_log1">{this.state.dispLog}</span>
+          <span className={"span_log1" + shadowRB}>{this.state.dispLog}</span>
         </div>
-        <div className="div_log2" onClick={() => {
+        <div className={"div_log2" + (global.app.imageFlag ? "" : " div_log_color")} onClick={() => {
           global.calc.returnMode = global.calc.modeNumber;
           this.props.setMode(global.calc.modeOption);
         }}>
-          <span className={global.calc.italicFlag ? "span_log2_italic" : "span_log2"}>{dispStr}</span>
+          <span className={(global.calc.italicFlag ? "span_log2_italic" : "span_log2") + shadowRB}>{dispStr}</span>
         </div>
-        <div className="div_log1" onClick={() => {
+        <div className={"div_log1" + (global.app.imageFlag ? "" : " div_log_color")} onClick={() => {
           global.calc.returnMode = global.calc.modeNumber;
           this.props.setMode(global.calc.modeOption);
         }}>
-          <span className="span_log1">A = {this.state.dispAnswer}&nbsp;&nbsp;M = {this.state.dispMemory}</span>
+          <span className={"span_log1" + shadowRB}>A = {this.state.dispAnswer}&nbsp;&nbsp;M = {this.state.dispMemory}</span>
         </div>
         <div className="div_row">
-          <div className="button1 div_color_blue" onClick={this.onButtonMAdd}>
-            <span className="span_font_25 span_color_black">M+</span>
+          <div className={"button1 div_color_blue" + colorTrans} onClick={this.onButtonMAdd}>
+            <span className={"span_font_25 span_color_black" + shadowRB}>M+</span>
           </div>
-          <div className="button1 div_color_blue" onClick={this.onButtonMSub}>
-            <span className="span_font_25 span_color_black">M-</span>
+          <div className={"button1 div_color_blue" + colorTrans} onClick={this.onButtonMSub}>
+            <span className={"span_font_25 span_color_black" + shadowRB}>M-</span>
           </div>
-          <div className="button1 div_color_blue" onClick={this.onButtonMRC}>
-            <span className={"span_font_25 span_color_" + (global.calc.memoryRecalled ? "red" : "black")}>{this.state.mrcButtonText}</span>
+          <div className={"button1 div_color_blue" + colorTrans} onClick={this.onButtonMRC}>
+            <span className={"span_font_25 span_color_" + (global.calc.memoryRecalled ? "red" : "black") + shadowRB}>{this.state.mrcButtonText}</span>
           </div>
-          <div className="button1 div_color_red" onClick={this.onButtonFunction}>
-            <span className="span_font_25 span_color_white">FNC</span>
+          <div className={"button1 div_color_red" + colorTrans} onClick={this.onButtonFunction}>
+            <span className={"span_font_25 span_color_white" + shadowLT}>FNC</span>
           </div>
         </div>
       </div>
@@ -189,23 +193,27 @@ class MyNumberB extends React.Component {
   render() {
     console.log("MyNumberB render");
 
-    const classNameDivCe = "button2 div_color_" + (global.calc.errorFlag ? "red" : "white");
+    const colorTrans = global.app.imageFlag ? "_t" : "";
+    const shadowLT = global.app.imageFlag ? " shadow_lt" : "";
+    const shadowRB = global.app.imageFlag ? " shadow_rb" : "";
+
+    const classNameDivCe = "button2 div_color_" + (global.calc.errorFlag ? "red" : "white") + colorTrans;
     const classNameSpanCe = "span_font_32 span_color_" + (global.calc.errorFlag ? "white" : "red");
 
     return (
       <div>
         <div className="div_row">
           <div className={classNameDivCe} onClick={this.onButtonCE}>
-            <span className={classNameSpanCe}>CE</span>
+            <span className={classNameSpanCe + (global.calc.errorFlag ? shadowLT : shadowRB)}>CE</span>
           </div>
           <div className={classNameDivCe} onClick={this.onButtonC}>
-            <span className={classNameSpanCe}>C</span>
+            <span className={classNameSpanCe + (global.calc.errorFlag ? shadowLT : shadowRB)}>C</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButtonDEL}>
-            <span className="span_font_32 span_color_black">DEL</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButtonDEL}>
+            <span className={"span_font_32 span_color_black" + shadowRB}>DEL</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButtonDiv}>
-            <span className="span_font_40 span_color_black">÷</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButtonDiv}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>÷</span>
           </div>
         </div>
       </div>
@@ -306,62 +314,66 @@ class MyNumberC extends React.Component {
 
   render() {
     console.log("MyNumberC render");
+
+    const colorTrans = global.app.imageFlag ? "_t" : "";
+    const shadowRB = global.app.imageFlag ? " shadow_rb" : "";
+
     return (
       <div>
         <div className="div_row">
-          <div className="button2 div_color_white" onClick={this.onButton7}>
-            <span className="span_font_40 span_color_black">7</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton7}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>7</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButton8}>
-            <span className="span_font_40 span_color_black">8</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton8}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>8</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButton9}>
-            <span className="span_font_40 span_color_black">9</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton9}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>9</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButtonMul}>
-            <span className="span_font_40 span_color_black">×</span>
-          </div>
-        </div>
-        <div className="div_row">
-          <div className="button2 div_color_white" onClick={this.onButton4}>
-            <span className="span_font_40 span_color_black">4</span>
-          </div>
-          <div className="button2 div_color_white" onClick={this.onButton5}>
-            <span className="span_font_40 span_color_black">5</span>
-          </div>
-          <div className="button2 div_color_white" onClick={this.onButton6}>
-            <span className="span_font_40 span_color_black">6</span>
-          </div>
-          <div className="button2 div_color_white" onClick={this.onButtonSub}>
-            <span className="span_font_40 span_color_black">-</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButtonMul}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>×</span>
           </div>
         </div>
         <div className="div_row">
-          <div className="button2 div_color_white" onClick={this.onButton1}>
-            <span className="span_font_40 span_color_black">1</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton4}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>4</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButton2}>
-            <span className="span_font_40 span_color_black">2</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton5}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>5</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButton3}>
-            <span className="span_font_40 span_color_black">3</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton6}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>6</span>
           </div>
-          <div className="button2 div_color_white" onClick={this.onButtonAdd}>
-            <span className="span_font_40 span_color_black">+</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButtonSub}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>-</span>
           </div>
         </div>
         <div className="div_row">
-          <div className="button3 div_color_white" onClick={this.onButtonNegative}>
-            <span className="span_font_40 span_color_black">+/-</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton1}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>1</span>
           </div>
-          <div className="button3 div_color_white" onClick={this.onButton0}>
-            <span className="span_font_40 span_color_black">0</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton2}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>2</span>
           </div>
-          <div className="button3 div_color_white" onClick={this.onButtonPoint}>
-            <span className="span_font_40 span_color_black">.</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButton3}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>3</span>
           </div>
-          <div className="button3 div_color_white" onClick={this.onButtonEqual}>
-            <span className="span_font_40 span_color_red">=</span>
+          <div className={"button2 div_color_white" + colorTrans} onClick={this.onButtonAdd}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>+</span>
+          </div>
+        </div>
+        <div className="div_row">
+          <div className={"button3 div_color_white" + colorTrans} onClick={this.onButtonNegative}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>+/-</span>
+          </div>
+          <div className={"button3 div_color_white" + colorTrans} onClick={this.onButton0}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>0</span>
+          </div>
+          <div className={"button3 div_color_white" + colorTrans} onClick={this.onButtonPoint}>
+            <span className={"span_font_40 span_color_black" + shadowRB}>.</span>
+          </div>
+          <div className={"button3 div_color_white" + colorTrans} onClick={this.onButtonEqual}>
+            <span className={"span_font_40 span_color_red" + shadowRB}>=</span>
           </div>
         </div>
       </div>
@@ -399,8 +411,16 @@ class MyNumber extends React.Component {
 
   render() {
     console.log("MyNumber render");
+
+    const backgroundImage = global.app.imageFlag ? "url(" + global.app.imageUrl + ")" : "";
+    const backgroundPosition = "" + global.app.imageX + "% " + global.app.imageY + "%";
+
     return (
-      <div className="body">
+      <div className="body" style={{
+        backgroundImage: backgroundImage,
+        backgroundSize: 'cover',
+        backgroundPosition: backgroundPosition
+      }}>
         <MyNumberA setMyNumberA={this.setMyNumberA} setMode={this.props.setMode} />
         <MyNumberB setMyNumberB={this.setMyNumberB} />
         <MyNumberC />

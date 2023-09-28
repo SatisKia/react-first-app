@@ -127,6 +127,7 @@ class App extends React.Component {
     super(props);
 
     // グローバルデータとサービス
+    global.app.init();
     global.calc.init();
     global.calcNumberService   = new MyCalcNumberService();
     global.calcFunctionService = new MyCalcFunctionService();
