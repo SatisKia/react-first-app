@@ -98,6 +98,15 @@ global.calc.save = (flag: number) => {
 };
 
 global.calc.isEnglish = () => {
-  const language = (window.navigator.languages && window.navigator.languages[0]) || window.navigator.language;
+  var language: string = "";
+  if( "languages" in window.navigator ){
+    language = window.navigator["languages"][0] as string;
+  } else if( "browserLanguage" in window.navigator ){
+    language = window.navigator["browserLanguage"] as string;
+  } else if( "language" in window.navigator ){
+    language = window.navigator["language"] as string;
+  } else if( "userLanguage" in window.navigator ){
+    language = window.navigator["userLanguage"] as string;
+  }
   return language.substring(0, 2) === "en";
 }
