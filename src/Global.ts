@@ -109,4 +109,6 @@ global.calc.isEnglish = () => {
     language = window.navigator["userLanguage"] as string;
   }
   return language.substring(0, 2) === "en";
-}
+};
+
+export {};
