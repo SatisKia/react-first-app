@@ -3,7 +3,7 @@ class MyCookie {
 
   setExpiresDate = (date) => {
     let time = (new Date()).getTime();
-    this.expires = (new Date(time + date * 86400000)).toGMTString();
+    this.expires = (new Date(time + date * 86400000)).toUTCString();
   };
 
   getArray = () => {
@@ -37,23 +37,23 @@ class MyCookie {
     for (let i = 0; i < cookie.length; i++ ){
       let param = this.getParam(cookie[i]);
       if (param[0] === key) {
-        let value = unescape(param[1]);
-        console.log("cookie getValue "+key+" "+value);
+        let value = decodeURI(param[1]);
+        console.log("cookie getValue " + key + " " + value);
         return value;
       }
     }
-    console.log("cookie getDefValue "+key+" "+defValue);
+    console.log("cookie getDefValue " + key + " " + defValue);
     return defValue;
   };
   getNumber = (key, defValue) => {
-    return Number(this.getValue(key, defValue));
+    return Number(this.getValue(key, String(defValue)));
   };
   getBool = (key, defValue) => {
-    return Number(this.getValue(key, defValue)) !== 0;
+    return Number(this.getValue(key, defValue ? "1" : "0")) !== 0;
   };
 
   setValue = (key, value) => {
-    console.log("cookie setValue "+key+" "+value);
+    console.log("cookie setValue " + key + " " + value);
     if (value == null) {
       value = "";
     }
@@ -63,7 +63,7 @@ class MyCookie {
       date.setTime(0);
       expires = date.toGMTString();
     }
-    document.cookie = key + "=" + escape(value) + "; expires=" + expires;
+    document.cookie = key + "=" + encodeURI(value) + "; expires=" + expires;
   };
   setNumber = (key, value) => {
     this.setValue(key, String(value));
