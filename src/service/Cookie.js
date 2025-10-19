@@ -61,7 +61,7 @@ class MyCookie {
     if (value.length === 0) {
       let date = new Date();
       date.setTime(0);
-      expires = date.toGMTString();
+      expires = date.toUTCString();
     }
     document.cookie = key + "=" + encodeURI(value) + "; expires=" + expires;
   };
